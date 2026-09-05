@@ -1,0 +1,4 @@
+CloudoraSignIn_CL
+| where IPAddress startswith "102.89." and ResultType == "0"
+| summarize by UserPrincipalName, IPAddress, TimeGenerated
+| order by TimeGenerated asc 

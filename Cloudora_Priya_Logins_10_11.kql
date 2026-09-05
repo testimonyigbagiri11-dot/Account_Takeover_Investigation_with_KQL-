@@ -1,0 +1,5 @@
+CloudoraSignIn_CL
+| where UserPrincipalName == "priya.nair@cloudora.io"
+| where TimeGenerated between (datetime(2026-08-10) .. datetime(2026-08-11))
+| project TimeGenerated, AppDisplayName, IPAddress, City, Country, ResultType, ResultDescription
+| order by TimeGenerated asc

@@ -1,0 +1,16 @@
+CloudoraSignIn_CL
+| where TimeGenerated >= datetime(2026-08-08)
+    and TimeGenerated < datetime(2026-08-12)
+| where ResultType != 0
+| where IPAddress startswith "102.89."
+| summarize
+    FailedLoginCount = count(),
+    arg_max(TimeGenerated, IPAddress, City)
+    by UserPrincipalName
+| project
+    UserPrincipalName,
+    IPAddress,
+    City,
+    TimeGenerated,
+    FailedLoginCount
+| order by FailedLoginCount asc 

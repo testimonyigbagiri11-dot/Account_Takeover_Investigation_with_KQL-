@@ -1,0 +1,4 @@
+CloudoraSignIn_CL
+| where ResultType == "50126"
+| summarize Failures=count(), TargetedAccounts=dcount(UserPrincipalName) by IPAddress, Country
+| order by Failures asc

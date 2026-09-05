@@ -1,0 +1,3 @@
+CloudoraSignIn_CL
+| where IPAddress startswith "102.89."
+| summarize Attempts=count() by bin(TimeGenerated, 1d), ResultType

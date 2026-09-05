@@ -1,0 +1,4 @@
+CloudoraAudit_CL
+| where IPAddress startswith "102.89."
+| project TimeGenerated, ActivityDisplayName, TargetUser, Details
+| order by TimeGenerated asc
