@@ -66,15 +66,3 @@ CloudoraSignIn_CL
 ## Read the Full Report
 
 📄 [CLD-0001_Incident_Report.md](./CLD-0001_Incident_Report.md)
-
-## Portfolio Framing
-
-This project is listed on my CV under a clearly labeled **"Simulated Client Engagements — MyFirstHack"** section, never presented as employment history.
-
-**How I describe it in interviews:**
-
-> "I investigated an executive account takeover end to end — traced a password spray to the initial access, found MFA persistence and a BEC inbox rule, scoped a second compromised account, and wrote the incident report. I can walk you through every decision."
-
----
-
-*Training resource: [MyFirstHack](https://myfirstcyberjob.com) community — beginner-friendly SOC analyst engagements.*

@@ -14,7 +14,7 @@
 
 ## Executive Summary
 
-On the morning of 10 August 2026, Cloudora's IT admin flagged an anomalous sign-in to CEO Daniel Reeve's account from Lagos, Nigeria at 03:12 UTC, while Reeve was known to be in London. Investigation confirmed this was **not travel but a genuine account takeover**, the result of a three-day password-spray campaign against 26 Cloudora employee accounts from a shared block of Nigerian IP addresses. Two accounts were successfully breached — **Daniel Reeve (CEO)** and **Priya Nair** — while the remaining 24 targeted accounts resisted compromise. On Reeve's account, the attacker established persistence by registering a rogue MFA device and creating a concealed inbox rule designed to hide finance/invoice-related correspondence, consistent with staging for Business Email Compromise (BEC) / invoice fraud. No equivalent persistence was found on Nair's account. All findings below are supported by Entra ID sign-in and audit log evidence queried via KQL.
+On the morning of 10 August 2026, Cloudora's IT admin flagged an anomalous sign-in to CEO Daniel Reeve's account from Lagos, Nigeria at 03:12 UTC, while Reeve was known to be in London. Investigation confirmed this was **not travel but a genuine account takeover**, the result of a three day password spray campaign against 26 Cloudora employee accounts from a shared block of Nigerian IP addresses. Two accounts were successfully breached  **Daniel Reeve (CEO)** and **Priya Nair**  while the remaining 24 targeted accounts resisted compromise. On Reeve's account, the attacker established persistence by registering a rogue MFA device and creating a concealed inbox rule designed to hide finance/invoice-related correspondence, consistent with staging for Business Email Compromise (BEC) / invoice fraud. No equivalent persistence was found on Nair's account. All findings below are supported by Entra ID sign-in and audit log evidence queried via KQL.
 
 ---
 
@@ -53,13 +53,13 @@ IT admin flagged a sign-in to `daniel.reeve@cloudora.io` from Lagos, Nigeria at 
 
 ### 2.3 Root Cause: Password Spray (Confirmed)
 
-Query of all `ResultType == "50126"` (invalid credential) events against the three source IPs returned **114 failed attempts across 26 distinct Cloudora accounts** over three consecutive nights (08–10 Aug), with 1–5 failures per account — a distribution consistent with **password spraying** (low attempts per account, broad account coverage, designed to evade lockout thresholds) rather than brute force or credential stuffing against a single target.
+Query of all `ResultType == "50126"` (invalid credential) events against the three source IPs returned **114 failed attempts across 26 distinct Cloudora accounts** over three consecutive nights (08–10 Aug), with 1–5 failures per account a distribution consistent with **password spraying** (low attempts per account, broad account coverage, designed to evade lockout thresholds) rather than brute force or credential stuffing against a single target.
 
-Daily attempt volume: 44 (08/08) → 36 (09/08) → 34 (10/08) failures, followed by 5 successful authentications on 10/08 from the same subnet — 3 against Daniel Reeve's account, 2 against Priya Nair's.
+Daily attempt volume: 44 (08/08) → 36 (09/08) → 34 (10/08) failures, followed by 5 successful authentications on 10/08 from the same subnet 3 against Daniel Reeve's account, 2 against Priya Nair's.
 
 ### 2.4 False-Positive Ruled Out
 
-A separate anomaly was reviewed and excluded from scope: `omar.farah@cloudora.io` also showed unfamiliar-country sign-ins (Dubai, UAE) during the same window. Unlike the Lagos activity, Omar's Dubai sign-ins were **daytime, successful on first attempt, from his normal device, and sustained consistently across three days** — a pattern consistent with legitimate business travel, not compromise. Omar's account was, however, confirmed as a **spray target** (failed attempts from the same three Lagos IPs), though none succeeded.
+A separate anomaly was reviewed and excluded from scope: `omar.farah@cloudora.io` also showed unfamiliar-country sign-ins (Dubai, UAE) during the same window. Unlike the Lagos activity, Omar's Dubai sign-ins were **daytime, successful on first attempt, from his normal device, and sustained consistently across three days** a pattern consistent with legitimate business travel, not compromise. Omar's account was, however, confirmed as a **spray target** (failed attempts from the same three Lagos IPs), though none succeeded.
 
 ### 2.5 Persistence Analysis (MITRE ATT&CK)
 
@@ -68,7 +68,7 @@ A separate anomaly was reviewed and excluded from scope: `omar.farah@cloudora.io
 | Password Spraying | T1110.003 | 114 low-frequency failed logins across 26 accounts from 3 IPs over 3 nights |
 | Valid Accounts | T1078 | Successful authentication using legitimate credentials for 2 accounts |
 | Device Registration (MFA persistence) | T1098.005 | Rogue "Pixel 6" authenticator registered on daniel.reeve's account at 03:18:44 |
-| Email Hiding Rules | T1564.008 | "RSS Subscriptions" inbox rule created at 03:31:09, filtering finance/invoice mail out of view — staging for BEC/invoice fraud |
+| Email Hiding Rules | T1564.008 | "RSS Subscriptions" inbox rule created at 03:31:09, filtering finance/invoice mail out of view staging for BEC/invoice fraud |
 
 **Note:** Persistence mechanisms (rogue MFA device, inbox rule) were found **only on Daniel Reeve's account**. Priya Nair's audit log returned no matching events — her compromise window appears limited to authentication and read access (Microsoft 365, SharePoint Online), with no confirmed attacker-created backdoor.
 
@@ -86,19 +86,19 @@ A separate anomaly was reviewed and excluded from scope: `omar.farah@cloudora.io
 ### 3.1 Containment (immediate)
 
 For both compromised accounts (daniel.reeve, priya.nair):
-1. **Revoke all active sessions and refresh tokens** — performed before password reset, to ensure any live attacker session is terminated rather than surviving a credential change.
+1. **Revoke all active sessions and refresh tokens** performed before password reset, to ensure any live attacker session is terminated rather than surviving a credential change.
 2. **Force password reset** at next sign-in for both accounts.
 3. **Block source IPs** (102.89.44.17, 102.89.44.23, 102.89.45.101) via Conditional Access.
 
 ### 3.2 Eradication
 
-4. **Remove the attacker's registered MFA device** ("Pixel 6") from daniel.reeve@cloudora.io — performed *before* considering the account clean, since a password reset alone does not remove an attacker-controlled MFA method.
+4. **Remove the attacker's registered MFA device** ("Pixel 6") from daniel.reeve@cloudora.io performed *before* considering the account clean, since a password reset alone does not remove an attacker-controlled MFA method.
 5. **Delete the malicious inbox rule** ("RSS Subscriptions") from daniel.reeve@cloudora.io.
 6. **Manual verification of priya.nair's mailbox** for rules or forwarding not captured in the audit log, despite the log returning no automated findings.
 
 ### 3.3 Recovery
 
-7. **Force password resets for all 24 non-breached targeted accounts.** Rationale: a failed login attempt confirms the password *guessed* was wrong — it does not confirm the account's actual password is not otherwise compromised (e.g., sourced from a separate credential leak) or that a later attempt from unlogged infrastructure did not succeed. Resetting closes this exposure regardless of unconfirmed risk and is standard practice for any account confirmed to be on an active attacker's target list.
+7. **Force password resets for all 24 non-breached targeted accounts.** Rationale: a failed login attempt confirms the password *guessed* was wrong it does not confirm the account's actual password is not otherwise compromised (e.g., sourced from a separate credential leak) or that a later attempt from unlogged infrastructure did not succeed. Resetting closes this exposure regardless of unconfirmed risk and is standard practice for any account confirmed to be on an active attacker's target list.
 8. **Re-run Steps in Section 2** (timeline and scope queries) post-remediation to verify no further attacker activity from the blocked infrastructure or residual persistence.
 9. **Direct, out-of-band notification** to all 26 targeted users (phone/in-person, not email, in case of residual mailbox compromise) advising them they were targeted and to expect follow-up phishing attempts.
 
@@ -108,7 +108,7 @@ For both compromised accounts (daniel.reeve, priya.nair):
 
 ### 4.1 Lessons Learned
 - Detection relied on a human noticing a single anomalous login rather than automated correlation of the spray pattern itself, despite the pattern (many accounts, few attempts each, from a shared IP block) being a well-known, detectable signature.
-- Persistence mechanisms (MFA device registration, inbox rule creation) were not alerted on in real time, allowing roughly 13 minutes and 5 minutes respectively between initial breach and entrenchment — a narrow but real window in which faster detection could have prevented persistence entirely.
+- Persistence mechanisms (MFA device registration, inbox rule creation) were not alerted on in real time, allowing roughly 13 minutes and 5 minutes respectively between initial breach and entrenchment a narrow but real window in which faster detection could have prevented persistence entirely.
 - Investigation depended on having both sign-in **and** audit logs available; the persistence findings would not have surfaced from sign-in logs alone.
 
 ### 4.2 Recommendations
