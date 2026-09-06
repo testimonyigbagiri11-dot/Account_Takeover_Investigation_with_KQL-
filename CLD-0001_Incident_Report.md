@@ -142,37 +142,37 @@ This would have alerted on the night of 08 August — the first night of the cam
 *Insert supporting KQL query screenshots below. Suggested filenames if storing images in a repo `evidence/` folder — rename to match your actual files.*
 
 **Figure 1 — Daniel Reeve sign-in timeline, incident day (10/08)**
-![Daniel Reeve sign-in timeline](evidence/01_daniel_signin_timeline.png)
+![Daniel Reeve sign-in timeline](Evidence/01_daniel_signin_timeline.png)
 
 **Figure 2 — Daniel Reeve baseline sign-in locations (8-day window)**
-![Daniel Reeve baseline logins](evidence/02_daniel_baseline_logins.png)
+![Daniel Reeve baseline logins](Evidence/02_daniel_baseline_logins.png)
 
 **Figure 3 — Omar Farah baseline (false-positive comparison)**
-![Omar Farah baseline logins](evidence/03_omar_baseline_logins.png)
+![Omar Farah baseline logins](Evidence/03_omar_baseline_logins.png)
 
 **Figure 4 — Org-wide failed login summary by source IP**
-![Failed logins by IP](evidence/04_failed_logins_by_ip.png)
+![Failed logins by IP](Evidence/04_failed_logins_by_ip.png)
 
 **Figure 5 — Password-spray daily attempt volume**
-![Password spray timeline](evidence/05_spray_timeline.png)
+![Password spray timeline](Evidence/05_spray_timeline.png)
 
 **Figure 6 — Daniel Reeve audit log: MFA device registration and inbox rule**
-![Daniel Reeve audit log](evidence/06_daniel_audit_log.png)
+![Daniel Reeve audit log](Evidence/06_daniel_audit_log.png)
 
 **Figure 7 — Successful attacker logins across compromised accounts**
-![Successful attacker logins](evidence/07_successful_attacker_logins.png)
+![Successful attacker logins](Evidence/07_successful_attacker_logins.png)
 
 **Figure 8 — Priya Nair sign-in timeline, incident day**
-![Priya Nair sign-in timeline](evidence/08_priya_signin_timeline.png)
+![Priya Nair sign-in timeline](Evidence/08_priya_signin_timeline.png)
 
 **Figure 9 — Priya Nair baseline sign-in locations**
 ![Priya Nair baseline logins](evidence/09_priya_baseline_logins.png)
 
 **Figure 10 — Priya Nair audit log (no persistence found)**
-![Priya Nair audit log — empty](evidence/10_priya_audit_empty.png)
+![Priya Nair audit log — empty](Evidence/10_priya_audit_empty.png)
 
 **Figure 11 — Full list of targeted accounts (spray victims)**
-![Targeted accounts list](evidence/11_targeted_accounts_list.png)
+![Targeted accounts list](Evidence/11_targeted_accounts_list.png)
 
 ---
 
