@@ -8,14 +8,14 @@ Investigated a simulated executive account takeover during a fictional client en
 
 ## What I Did
 
-- Queried 8 days of Entra ID sign-in logs and audit logs using **KQL** in Azure Data Explorer
+- Queried 8 days of Entra ID sign-in logs and audit logs using KQL in Azure Data Explorer
 - Confirmed the Lagos sign-in was a genuine compromise (not travel) by establishing the CEO's sign-in baseline and comparing failed/successful login sequencing
-- Traced the intrusion backward to a **three-night password-spray campaign** against 26 employee accounts from three shared source IPs
-- Identified a **second compromised account** beyond the initial alert, missed by the original triage
+- Traced the intrusion backward to a three-night password-spray campaign** against 26 employee accounts from three shared source IPs
+- Identified a second compromised account** beyond the initial alert, missed by the original triage
 - Found attacker persistence: a rogue MFA device registration and a concealed inbox rule designed to hide finance/invoice correspondence — staging for Business Email Compromise
-- Ruled out a **false positive** on a third account (legitimate business travel, correctly distinguished from the malicious pattern using login timing, device consistency, and first-attempt success)
+- Ruled out a false positive** on a third account (legitimate business travel, correctly distinguished from the malicious pattern using login timing, device consistency, and first-attempt success)
 - Scoped the full blast radius: 26 targeted accounts, 2 breached, 24 requiring precautionary credential resets
-- Wrote a full incident report using the **NIST SP 800-61** incident response lifecycle, with findings mapped to **MITRE ATT&CK**
+- Wrote a full incident report using the NIST SP 800-61 incident response lifecycle, with findings mapped to MITRE ATT&CK
 
 ## Skills Demonstrated
 
@@ -59,7 +59,7 @@ CloudoraSignIn_CL
 | order by Failures desc
 ```
 
-**Result:** 3 IPs in a shared Nigerian range generated 114 failed logins across 26 distinct accounts over 3 nights — few attempts per account, broad account coverage, consistent with password spraying rather than brute force.
+Result: 3 IPs in a shared Nigerian range generated 114 failed logins across 26 distinct accounts over 3 nights — few attempts per account, broad account coverage, consistent with password spraying rather than brute force.
 
 ## Read the Full Report
 
