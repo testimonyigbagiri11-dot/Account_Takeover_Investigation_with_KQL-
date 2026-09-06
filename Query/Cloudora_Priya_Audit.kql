@@ -1,0 +1,4 @@
+CloudoraAudit_CL
+| where TargetUser == "priya.nair@cloudora.io"
+| project TimeGenerated, ActivityDisplayName, InitiatedBy, IPAddress, Details
+| order by TimeGenerated asc
