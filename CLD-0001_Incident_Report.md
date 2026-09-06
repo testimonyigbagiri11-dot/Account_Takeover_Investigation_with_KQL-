@@ -1,5 +1,5 @@
 # Incident Report — CLD-0001
-## Executive Account Takeover via Password Spray — Cloudora
+## Executive Account Takeover via Password Spray Cloudora
 
 | Field | Detail |
 |---|---|
@@ -20,7 +20,7 @@ On the morning of 10 August 2026, Cloudora's IT admin flagged an anomalous sign-
 
 ## 1. Preparation
 
-*(NIST Phase 1 — context on tooling and data available at time of investigation, not a description of pre-incident controls, which were found to be insufficient — see Section 5.)*
+*(NIST Phase 1 context on tooling and data available at time of investigation, not a description of pre-incident controls, which were found to be insufficient see Section 5.)*
 
 - **Data sources used:** `CloudoraSignIn_CL` (Entra ID sign-in logs, 8-day window, ~1,479 rows), `CloudoraAudit_CL` (directory/mailbox audit events)
 - **Tooling:** KQL queries executed via Azure Data Explorer (functionally identical to Microsoft Sentinel Log Analytics for this purpose)
@@ -70,7 +70,7 @@ A separate anomaly was reviewed and excluded from scope: `omar.farah@cloudora.io
 | Device Registration (MFA persistence) | T1098.005 | Rogue "Pixel 6" authenticator registered on daniel.reeve's account at 03:18:44 |
 | Email Hiding Rules | T1564.008 | "RSS Subscriptions" inbox rule created at 03:31:09, filtering finance/invoice mail out of view staging for BEC/invoice fraud |
 
-**Note:** Persistence mechanisms (rogue MFA device, inbox rule) were found **only on Daniel Reeve's account**. Priya Nair's audit log returned no matching events — her compromise window appears limited to authentication and read access (Microsoft 365, SharePoint Online), with no confirmed attacker-created backdoor.
+**Note:** Persistence mechanisms (rogue MFA device, inbox rule) were found **only on Daniel Reeve's account**. Priya Nair's audit log returned no matching events her compromise window appears limited to authentication and read access (Microsoft 365, SharePoint Online), with no confirmed attacker-created backdoor.
 
 ### 2.6 Scope
 
@@ -109,7 +109,7 @@ For both compromised accounts (daniel.reeve, priya.nair):
 ### 4.1 Lessons Learned
 - Detection relied on a human noticing a single anomalous login rather than automated correlation of the spray pattern itself, despite the pattern (many accounts, few attempts each, from a shared IP block) being a well-known, detectable signature.
 - Persistence mechanisms (MFA device registration, inbox rule creation) were not alerted on in real time, allowing roughly 13 minutes and 5 minutes respectively between initial breach and entrenchment a narrow but real window in which faster detection could have prevented persistence entirely.
-- Investigation depended on having both sign-in **and** audit logs available; the persistence findings would not have surfaced from sign-in logs alone.
+- Investigation depended on having both sign-in and audit logs available; the persistence findings would not have surfaced from sign-in logs alone.
 
 ### 4.2 Recommendations
 
@@ -120,8 +120,8 @@ For both compromised accounts (daniel.reeve, priya.nair):
 | 3 | Alert automatically on new MFA device registrations and new inbox rule creation | High |
 | 4 | Build detection rule: count of distinct accounts with failed logins per source IP within a 6-hour window, alert above threshold (see Section 4.3) | High |
 | 5 | Disable legacy authentication protocols (IMAP/POP/SMTP basic auth) if still enabled | Medium |
-| 6 | Targeted phishing-awareness refresh for all 26 identified target-list users | Medium |
-| 7 | Formalize out-of-band communication procedure for account-compromise notifications | Medium |
+| 6 | Targeted phishing awareness refresh for all 26 identified target list users | Medium |
+| 7 | Formalize out of band communication procedure for account-compromise notifications | Medium |
 
 ### 4.3 Proposed Detection Rule (Stretch Goal)
 

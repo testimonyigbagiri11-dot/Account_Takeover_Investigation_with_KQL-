@@ -1,8 +1,8 @@
-# CLD-0001 — Executive Account Takeover Investigation
+# CLD-0001 Executive Account Takeover Investigation
 
 ## Scenario
 
-Investigated a simulated executive account takeover during a fictional client engagement for Cloudora, a 150-person B2B HR software company. At 08:55, an IT admin flagged a sign-in to the CEO's account from Lagos, Nigeria at 03:12 while he was reportedly asleep in London. With the company days from closing its largest enterprise deal, the task was to confirm or rule out compromise, reconstruct the full attack timeline, identify any attacker persistence, determine whether other accounts were affected, and produce a client-ready incident report.
+Investigated a simulated executive account takeover during a fictional client engagement for Cloudora, a 150 person B2B HR software company. At 08:55, an IT admin flagged a sign-in to the CEO's account from Lagos, Nigeria at 03:12 while he was reportedly asleep in London. With the company days from closing its largest enterprise deal, the task was to confirm or rule out compromise, reconstruct the full attack timeline, identify any attacker persistence, determine whether other accounts were affected, and produce a client ready incident report.
 
 **Attack chain uncovered:** password spray → account takeover → MFA persistence → BEC (invoice fraud) staging.
 
@@ -19,7 +19,8 @@ Investigated a simulated executive account takeover during a fictional client en
 
 ## Skills Demonstrated
 
-- KQL (Kusto Query Language) — Microsoft Sentinel / Azure Data Explorer
+- KQL (Kusto Query Language) 
+- Microsoft Sentinel / Azure Data Explorer
 - Entra ID (Azure AD) sign-in log analysis
 - Account takeover (ATO) investigation methodology
 - Distinguishing true positives from false positives using behavioral baselines
