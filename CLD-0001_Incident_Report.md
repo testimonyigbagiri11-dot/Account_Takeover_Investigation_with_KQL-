@@ -166,7 +166,7 @@ This would have alerted on the night of 08 August — the first night of the cam
 ![Priya Nair sign-in timeline](Evidence/08_priya_signin_timeline.png)
 
 **Figure 9 — Priya Nair baseline sign-in locations**
-![Priya Nair baseline logins](evidence/09_priya_baseline_logins.png)
+![Priya Nair baseline logins](Evidence/09_priya_baseline_logins.png)
 
 **Figure 10 — Priya Nair audit log (no persistence found)**
 ![Priya Nair audit log — empty](Evidence/10_priya_audit_empty.png)
