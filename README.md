@@ -59,7 +59,7 @@ CloudoraSignIn_CL
 | order by Failures desc
 ```
 
-Result: 3 IPs in a shared Nigerian range generated 114 failed logins across 26 distinct accounts over 3 nights — few attempts per account, broad account coverage, consistent with password spraying rather than brute force.
+Result: 3 IPs in a shared Nigerian range generated 114 failed logins across 26 distinct accounts over 3 nights few attempts per account, broad account coverage, consistent with password spraying rather than brute force.
 
 ## Read the Full Report
 
