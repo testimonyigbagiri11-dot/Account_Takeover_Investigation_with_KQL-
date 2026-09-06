@@ -193,6 +193,3 @@ This would have alerted on the night of 08 August — the first night of the cam
 - **T1098.005** — Device Registration
 - **T1564.008** — Email Hiding Rules
 
----
-
-*Report prepared as part of a simulated client engagement (MyFirstHack training program). This is a fictional scenario used for skills development in SOC analysis, KQL, and incident reporting.*
